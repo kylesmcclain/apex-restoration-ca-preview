@@ -8,6 +8,6 @@
 2:["$","span",null,{"className":"row","children":[["$","span",null,{"className":"tick","children":"✓"}],["$","span",null,{"children":["CSLB licensed & insured in California"," ",["$","span",null,{"className":"light","children":"(license # placeholder)"}]]}]]}]
 3:["$","span",null,{"className":"row","children":[["$","span",null,{"className":"tick","children":"✓"}],"Background-checked, uniformed technicians"]}]
 4:["$","span",null,{"className":"row","children":[["$","span",null,{"className":"tick","children":"✓"}],"Lifetime warranty on every treated area"]}]
-5:["$","div",null,{"className":"cta-row","children":[["$","a",null,{"href":"tel:4155550134","className":"btn btn-primary","children":["Call ","(415) 555-0134"]}],["$","$L7",null,{"href":"/contact","className":"btn btn-outline","prefetch":false,"children":"Get my free quote"}]]}]
+5:["$","div",null,{"className":"cta-row","children":[["$","a",null,{"href":"tel:5109257538","className":"btn btn-primary","children":["Call ","(510) 925-7538"]}],["$","$L7",null,{"href":"/contact","className":"btn btn-outline","prefetch":false,"children":"Get my free quote"}]]}]
 6:["$","$L8",null,{"children":["$","$9",null,{"name":"Next.MetadataOutlet","children":"$@a"}]}]
 a:null
