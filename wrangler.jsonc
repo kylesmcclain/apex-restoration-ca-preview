@@ -1,0 +1,23 @@
+// Wrangler configuration for the Apex Restoration Next.js app, built for
+// Cloudflare Workers via @opennextjs/cloudflare (see `open-next.config.ts`
+// and the "preview"/"deploy" npm scripts in package.json).
+// https://opennext.js.org/cloudflare/get-started
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "apexrestorationca",
+	"main": ".open-next/worker.js",
+	// Pinned to the compatibility date matching the `workerd` version
+	// installed in node_modules at the time this was written; bump when
+	// intentionally picking up newer runtime behavior.
+	"compatibility_date": "2026-07-22",
+	"compatibility_flags": ["nodejs_compat"],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	}
+	// No `services` self-reference, `r2_buckets`, or `images` binding:
+	// this site has no ISR/revalidate routes (dummy incremental cache,
+	// see open-next.config.ts) and uses plain <img> tags everywhere, not
+	// next/image, so none of those bindings are needed. Add them here if
+	// that changes.
+}
