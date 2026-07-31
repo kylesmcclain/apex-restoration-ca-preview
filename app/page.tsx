@@ -27,16 +27,52 @@ const AREA_CHIPS = [
 export default function Home() {
   return (
     <main>
+      {/*
+        Preload the hero's AVIF so the browser can start fetching it
+        immediately, without waiting to parse the <picture> below. Two
+        preloads mirror the <picture> art-direction media queries so the
+        right variant (960px on phones, full-width otherwise) is the one
+        actually preloaded — React 19 hoists <link> tags rendered anywhere
+        in the tree up into <head>.
+      */}
+      <link
+        rel="preload"
+        as="image"
+        type="image/avif"
+        href="/images/hero-960.avif"
+        media="(max-width: 640px)"
+      />
+      <link
+        rel="preload"
+        as="image"
+        type="image/avif"
+        href="/images/hero.avif"
+        media="(min-width: 641px)"
+      />
       <div className="hero">
-        <img
-          src="/images/hero.jpg"
-          alt="Apex Restoration technician working inside containment"
-          className="hero-bg"
-          width={1920}
-          height={1080}
-          fetchPriority="high"
-          decoding="async"
-        />
+        <picture>
+          <source
+            media="(max-width: 640px)"
+            type="image/avif"
+            srcSet="/images/hero-960.avif"
+          />
+          <source
+            media="(max-width: 640px)"
+            type="image/webp"
+            srcSet="/images/hero-960.webp"
+          />
+          <source type="image/avif" srcSet="/images/hero.avif" />
+          <source type="image/webp" srcSet="/images/hero.webp" />
+          <img
+            src="/images/hero.jpg"
+            alt="Apex Restoration technician working inside containment"
+            className="hero-bg"
+            width={1920}
+            height={1080}
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
         <div className="hero-inner">
           <span className="eyebrow eyebrow-light">
             Now serving the San Francisco Bay Area
@@ -155,14 +191,18 @@ export default function Home() {
             </div>
           </div>
           <div className="why-us-media">
-            <img
-              src="/images/why-us.jpg"
-              alt="Apex technician scanning for hidden moisture with a thermal camera"
-              width={1200}
-              height={900}
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              <source type="image/avif" srcSet="/images/why-us.avif" />
+              <source type="image/webp" srcSet="/images/why-us.webp" />
+              <img
+                src="/images/why-us.jpg"
+                alt="Apex technician scanning for hidden moisture with a thermal camera"
+                width={1200}
+                height={900}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div className="stats-row">
               <div className="stat-card">
                 <span className="stat-value">

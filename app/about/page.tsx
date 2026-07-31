@@ -76,14 +76,18 @@ export default function AboutPage() {
             floor protection, shoe covers, and a clean, organized job site.
           </p>
         </div>
-        <img
-          src="/images/about-team.jpg"
-          alt="Apex Restoration technicians geared up on site"
-          width={1000}
-          height={1250}
-          loading="lazy"
-          decoding="async"
-        />
+        <picture>
+          <source type="image/avif" srcSet="/images/about-team.avif" />
+          <source type="image/webp" srcSet="/images/about-team.webp" />
+          <img
+            src="/images/about-team.jpg"
+            alt="Apex Restoration technicians geared up on site"
+            width={1000}
+            height={1250}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       </div>
 
       <div className="expect">
@@ -111,14 +115,18 @@ export default function AboutPage() {
       </div>
 
       <div className="container about-grid about-grid-rev">
-        <img
-          src="/images/about-finished.jpg"
-          alt="Clean restored kitchen and living area after mitigation"
-          width={1200}
-          height={900}
-          loading="lazy"
-          decoding="async"
-        />
+        <picture>
+          <source type="image/avif" srcSet="/images/about-finished.avif" />
+          <source type="image/webp" srcSet="/images/about-finished.webp" />
+          <img
+            src="/images/about-finished.jpg"
+            alt="Clean restored kitchen and living area after mitigation"
+            width={1200}
+            height={900}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
         <div className="about-copy">
           <h2>Built for California conditions</h2>
           <p>
