@@ -83,7 +83,7 @@ body {
 }
 
 a {
-  color:var(--blue);
+  color:var(--blue-ink);
   text-decoration:none;
 }
 
@@ -318,9 +318,16 @@ input,textarea {
 }
 
 .header-nav .btn-primary {
+  /* `.header-nav a` (0-1-1) outranks `.btn-primary` (0-1-0), so the button
+     inherits ink text on a blue fill unless colour is restated here. */
+  color:#fff;
   padding:11px 20px;
   font-size:14px;
   font-weight:600;
+}
+
+.header-nav .btn-primary:hover {
+  color:#fff;
 }
 
 .tagline-strip {
@@ -676,7 +683,7 @@ input,textarea {
 }
 
 .areas-link {
-  color:var(--blue);
+  color:var(--blue-ink);
   font-size:15.5px;
   font-weight:700;
 }
