@@ -202,7 +202,10 @@ input,textarea {
 }
 
 .rule-type::before,.rule-type::after {
-  content:""; flex:1 1 0; height:1px; background:currentColor; opacity:.32;
+  /* min-width is the floor: with a bare `flex:1 1 0` these collapse to zero
+     the moment the text wraps, silently deleting the brand's signature mark. */
+  content:""; flex:1 1 0; min-width:12px; height:1px;
+  background:currentColor; opacity:.32;
 }
 
 .rule-type::after { margin-left:-.3em; }  /* cancel trailing letter-space */
@@ -330,7 +333,13 @@ input,textarea {
 }
 
 .header-nav a {
+  /* Bare links had no vertical padding, giving a ~17px tap target on touch
+     devices. min-height + centring lifts the hit box past 44px without
+     changing the visual position of the text. */
   color:var(--ink);
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
 }
 
 .header-nav a:hover {
@@ -345,7 +354,7 @@ input,textarea {
   /* `.header-nav a` (0-1-1) outranks `.btn-primary` (0-1-0), so the button
      inherits ink text on a blue fill unless colour is restated here. */
   color:#fff;
-  padding:11px 20px;
+  padding:14px 20px;   /* 11px gave a 39px control, under the 44px touch floor */
   font-size:14px;
   font-weight:600;
 }
@@ -1447,7 +1456,7 @@ input,textarea {
   color:var(--blue-deep);
   font-family:var(--font-heading);
   border-radius:6px;
-  padding:12px 22px;
+  padding:14px 22px;   /* was 12px -> 41px control, under the 44px touch floor */
   font-size:14px;
   font-weight:600;
 }
@@ -1462,7 +1471,7 @@ input,textarea {
   font-family:var(--font-heading);
   border:2px solid #fff9;
   border-radius:6px;
-  padding:10px 22px;
+  padding:13px 22px;   /* was 10px -> 39px control, under the 44px touch floor */
   font-size:14px;
   font-weight:600;
 }
@@ -1589,6 +1598,14 @@ input,textarea {
   .services-grid,.expect-grid {
     grid-template-columns:repeat(2,1fr);
   }
+
+  /* The 4-column footer previously held all the way to 640px, squeezing the
+     brand column to ~177px at tablet width and breaking the two-line
+     signature into six with orphaned words. */
+  .footer-grid {
+    grid-template-columns:repeat(2,1fr);
+    gap:36px 44px;
+  }
   .why-us-grid,.areas-grid,.faq-grid,.about-grid,.about-grid-rev,.sa-grid,.contact-grid,.service-detail {
     grid-template-columns:1fr;
   }
@@ -1601,6 +1618,14 @@ input,textarea {
 }
 
 @media (max-width:640px) {
+  /* Tighter micro-caps so single-phrase rule-type labels stay on one line
+     (a wrap squeezes the flanking hairlines down to their min-width floor). */
+  .rule-type {
+    font-size:11px;
+    letter-spacing:.2em;
+    gap:10px;
+  }
+
   .container {
     padding-left:20px;
     padding-right:20px;
