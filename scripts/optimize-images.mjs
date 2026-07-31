@@ -58,7 +58,12 @@ async function generateVariant({ srcPath, destPath, resizeTo, format }) {
 
 async function main() {
   const entries = await readdir(IMAGES_DIR);
-  const jpegs = entries.filter((f) => /\.jpe?g$/i.test(f)).sort();
+  const jpegs = entries
+    .filter((f) => /\.jpe?g$/i.test(f))
+    // Skip previously-generated variants (e.g. hero-960.jpg) so re-running
+    // this script doesn't treat its own output as a new source image.
+    .filter((f) => f !== `${HERO_HALF_BASENAME}.jpg`)
+    .sort();
 
   const rows = [];
 
