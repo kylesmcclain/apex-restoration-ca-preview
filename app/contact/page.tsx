@@ -32,9 +32,7 @@ export default function ContactPage() {
         <QuoteForm />
         <div className="contact-aside">
           <div className="contact-call-card">
-            <span className="rule-type" style={{ color: "#fff" }}>
-              24/7 Emergency Service
-            </span>
+            <span className="rule-type">24/7 Emergency Service</span>
             <span className="title">Speak with the Apex team now</span>
             <span className="sub">
               Call for immediate assistance and same-hour dispatch.

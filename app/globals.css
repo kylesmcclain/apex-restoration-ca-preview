@@ -49,6 +49,9 @@
      No buttons, no hovers, no borders, nothing under 200px wide.
      All text on a --grad-signal surface is #fff; --blue-on-dark is banned there. */
   --grad-signal:linear-gradient(90deg,#1f6fe5 0%,#123e86 42%,#0b0e13 100%);
+  /* Same stops, angled to run with the stacking direction once .footer-cta
+     wraps at <=640px. Keep the three colour stops in sync with --grad-signal. */
+  --grad-signal-wrap:linear-gradient(165deg,#1f6fe5 0%,#123e86 42%,#0b0e13 100%);
   --grad-hero:linear-gradient(100deg,#0a0d12 0%,#12161c 52%,#161b24 100%);
 
   /* Shadows — alphas unchanged from the previous palette, RGB re-pointed. */
@@ -1638,7 +1641,7 @@ input,textarea {
   }
   /* Gradient runs with the stacking direction once the band wraps. */
   .footer-cta {
-    background:linear-gradient(165deg,#1f6fe5 0%,#123e86 42%,#0b0e13 100%);
+    background:var(--grad-signal-wrap);
   }
   .footer-grid {
     grid-template-columns:1fr;
