@@ -213,8 +213,29 @@ input,textarea {
 
 .rule-type-start::after  { flex:0 0 clamp(24px,7vw,72px); }
 
-/* Tracking decreases as size increases: .3em at 12.5px, .18em here. */
-.rule-type-lg { font-size:20px; gap:22px; letter-spacing:.18em; }
+/* Tracking decreases as size increases: .3em at 12.5px, .18em here.
+   The larger size needs a wider measure than .rule-type-center's 460px:
+   at 20px/.18em the manifesto lines exceed it, and because the hairlines are
+   `flex:1 1 0` siblings of the text they collapse to zero the moment the text
+   wraps — the signature device silently disappears. Widen the measure, scale
+   the type down on narrow screens, and give the rules a hard floor so they can
+   never vanish entirely. */
+.rule-type-lg {
+  font-size:clamp(14px,2.3vw,20px);
+  gap:clamp(12px,2vw,22px);
+  letter-spacing:.18em;
+  /* width:100% is load-bearing. `.manifesto` is a flex column, and the
+     `margin-inline:auto` these inherit from .rule-type-center cancels the
+     default stretch — leaving the row shrink-to-fit at ~548px, which is
+     narrower than the copy needs and forces the wrap this variant exists to
+     avoid. Fill the column, then cap the measure. */
+  width:100%;
+  max-width:820px;
+  margin-inline:auto;
+  text-align:center;
+}
+
+.rule-type-lg::before,.rule-type-lg::after { flex:0 1 clamp(20px,6vw,64px); }
 
 .rule-type-lg::after { margin-left:-.18em; }
 
