@@ -79,6 +79,10 @@ export default function AboutPage() {
         <img
           src="/images/about-team.jpg"
           alt="Apex Restoration technicians geared up on site"
+          width={1000}
+          height={1250}
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
@@ -110,6 +114,10 @@ export default function AboutPage() {
         <img
           src="/images/about-finished.jpg"
           alt="Clean restored kitchen and living area after mitigation"
+          width={1200}
+          height={900}
+          loading="lazy"
+          decoding="async"
         />
         <div className="about-copy">
           <h2>Built for California conditions</h2>

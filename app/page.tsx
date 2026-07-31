@@ -32,6 +32,10 @@ export default function Home() {
           src="/images/hero.jpg"
           alt="Apex Restoration technician working inside containment"
           className="hero-bg"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="hero-inner">
           <span className="eyebrow eyebrow-light">
@@ -154,6 +158,10 @@ export default function Home() {
             <img
               src="/images/why-us.jpg"
               alt="Apex technician scanning for hidden moisture with a thermal camera"
+              width={1200}
+              height={900}
+              loading="lazy"
+              decoding="async"
             />
             <div className="stats-row">
               <div className="stat-card">

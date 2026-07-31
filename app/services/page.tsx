@@ -157,7 +157,14 @@ export default function ServicesPage() {
         {SERVICE_DETAILS.map((service) => (
           <div key={service.id} id={service.id} className="service-detail">
             {service.imageFirst && (
-              <img src={service.image.src} alt={service.image.alt} />
+              <img
+                src={service.image.src}
+                alt={service.image.alt}
+                width={1200}
+                height={900}
+                loading="lazy"
+                decoding="async"
+              />
             )}
             <div className="service-detail-copy">
               <span className="service-detail-icon">{service.icon}</span>
@@ -183,7 +190,14 @@ export default function ServicesPage() {
               )}
             </div>
             {!service.imageFirst && (
-              <img src={service.image.src} alt={service.image.alt} />
+              <img
+                src={service.image.src}
+                alt={service.image.alt}
+                width={1200}
+                height={900}
+                loading="lazy"
+                decoding="async"
+              />
             )}
           </div>
         ))}
