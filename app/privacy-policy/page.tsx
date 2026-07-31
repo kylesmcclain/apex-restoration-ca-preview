@@ -10,10 +10,7 @@ export default function PrivacyPolicyPage() {
   return (
     <main className="legal">
       <h1>Privacy Policy</h1>
-      <p className="updated">
-        Last updated: July 2026 — placeholder copy; have your attorney review
-        before publishing.
-      </p>
+      <p className="updated">Last updated: July 2026</p>
 
       <h2>Information we collect</h2>
       <p>

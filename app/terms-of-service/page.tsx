@@ -14,10 +14,7 @@ export default function TermsOfServicePage() {
   return (
     <main className="legal">
       <h1>Terms of Service</h1>
-      <p className="updated">
-        Last updated: July 2026 — placeholder copy; have your attorney review
-        before publishing.
-      </p>
+      <p className="updated">Last updated: July 2026</p>
 
       <h2>Use of this website</h2>
       <p>
