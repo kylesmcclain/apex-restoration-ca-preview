@@ -2,22 +2,70 @@
   Apex Restoration — global stylesheet.
   Ported verbatim from the original build (_next/static/chunks/1v08so0bb2zeo.css).
   --font-montserrat / --font-source-sans are provided by next/font in app/layout.tsx.
+  Token block below is authoritative: context/style-guide.md.
 */
 
 :root {
-  --navy:#14202e;
-  --navy-dark:#0d1620;
-  --blue:#2e8fd8;
-  --blue-hover:#1f6fae;
-  --blue-light:#4ba3e3;
-  --blue-tint:#e8f3fc;
-  --ink:#1c2733;
-  --body:#3d4956;
-  --muted:#5b6774;
-  --muted-2:#7d8794;
-  --border:#dfe5ea;
-  --bg-light:#f2f6f9;
-  --footer-text:#9fb3c4;
+  /* Brand blue — hue 216. FILL vs TYPE split is load-bearing. */
+  --blue:#1f6fe5;              /* fills only. white on it = 4.70:1 */
+  --blue-ink:#1858bc;          /* blue as TYPE at <=15px. on white 6.64:1, on --bg-light 6.07:1 */
+  --blue-hover:var(--blue-ink);
+  --blue-deep:#123e86;         /* gradient mid-stop; type on white buttons over gradients. 10.20:1 */
+  --blue-on-dark:#6ba5f5;      /* blue as type on flat ink. on --ink-800 = 7.19:1 */
+  --blue-light:var(--blue-on-dark);
+  --blue-tint:#e9f1fe;
+
+  /* Ink — saturation 22%, NOT neutral black. See "why 22%" in the style guide. */
+  --ink-900:#0b0e13;
+  --ink-800:#12161c;           /* primary dark surface. white on it = 18.15:1 */
+  --ink-700:#1b212a;
+  --navy:var(--ink-800);       /* alias kept: 87 var() refs across the file */
+  --navy-dark:var(--ink-900);
+
+  /* Type on light */
+  --ink:#15181d;               /* 17.79:1 */
+  --body:#39414c;              /* 10.32:1 */
+  --muted:#59616c;             /* 6.27:1 */
+  --muted-2:#6f7681;           /* 4.58:1 — was 7d8794 at 3.64, an AA failure */
+
+  /* Type on dark */
+  --on-dark:#d7dbe1;           /* 13.06:1 */
+  --on-dark-2:#b6bcc6;         /* 9.50:1 */
+  --on-dark-3:#828993;         /* 5.14:1 — was 6d8093 at 4.04, an AA failure */
+  --footer-text:#a7aeb8;       /* 8.11:1 */
+
+  /* Lines & light surfaces */
+  --border:#dfe3e8;
+  --border-strong:#c4cad3;
+  --rule:#d8dce2;
+  --rule-on-dark:#2a313b;
+  --bg-light:#f2f5f8;
+  --bg-subtle:#f7f9fb;
+
+  /* Gradients — permitted on exactly three selectors, nowhere else:
+       .footer-cta          -> --grad-signal
+       .contact-call-card   -> --grad-signal
+       .hero                -> --grad-hero
+     No buttons, no hovers, no borders, nothing under 200px wide.
+     All text on a --grad-signal surface is #fff; --blue-on-dark is banned there. */
+  --grad-signal:linear-gradient(90deg,#1f6fe5 0%,#123e86 42%,#0b0e13 100%);
+  /* Same stops, angled to run with the stacking direction once .footer-cta
+     wraps at <=640px. Keep the three colour stops in sync with --grad-signal. */
+  --grad-signal-wrap:linear-gradient(165deg,#1f6fe5 0%,#123e86 42%,#0b0e13 100%);
+  --grad-hero:linear-gradient(100deg,#0a0d12 0%,#12161c 52%,#161b24 100%);
+
+  /* Shadows — alphas unchanged from the previous palette, RGB re-pointed. */
+  --shadow-hairline:0 1px #12161c14;
+  --shadow-img:0 10px 30px #12161c26;   /* must stay NEUTRAL, never blue */
+  --shadow-card:0 8px 28px #12161c0f;
+  --shadow-blue:0 6px 20px #1f6fe51f;
+  --focus-ring:0 0 0 3px #1f6fe529;
+
+  /* Feedback */
+  --danger:#c0392b;            /* 5.44:1 on white */
+  --success:#1f7a46;           /* was 2c9e57 at 3.07:1 on its tint — a failure */
+  --success-tint:#e7f4ec;      /* success on tint = 4.72:1 */
+
   --font-heading:var(--font-montserrat), sans-serif;
   --font-body:var(--font-source-sans), sans-serif;
 }
@@ -38,7 +86,7 @@ body {
 }
 
 a {
-  color:var(--blue);
+  color:var(--blue-ink);
   text-decoration:none;
 }
 
@@ -91,19 +139,19 @@ input,textarea {
 
 .btn-outline {
   border:2px solid var(--blue);
-  color:var(--blue);
+  color:var(--blue-ink);
   padding:11px 24px;
   font-size:15px;
 }
 
 .btn-outline:hover {
   background:var(--blue-tint);
-  color:var(--blue);
+  color:var(--blue-ink);
 }
 
 .btn-ghost-light {
   color:#fff;
-  background:#ffffff1a;
+  background:#ffffff1f;
   border:2px solid #ffffff80;
   padding:14px 30px;
   font-size:17px;
@@ -114,29 +162,96 @@ input,textarea {
   border-color:#fff;
 }
 
+/* Keyboard focus. The site sets outline:none in places and previously signalled
+   focus by border-colour alone — an AA failure. */
+.btn:focus-visible,.form-submit:focus-visible,.header-nav a:focus-visible {
+  outline:2px solid var(--blue);
+  outline-offset:2px;
+}
+
+/* Flat dark surfaces: the primary blue is only 4.02:1 there. */
+.hero .btn:focus-visible,.page-hero .btn:focus-visible,.faq-section .btn:focus-visible,.btn-ghost-light:focus-visible {
+  outline-color:var(--blue-on-dark);
+}
+
+/* Gradient surfaces: --blue-on-dark is banned, everything on them is #fff. */
+.footer-cta .btn:focus-visible,.footer-cta a:focus-visible,.contact-call-card .btn:focus-visible {
+  outline-color:#fff;
+}
+
 .eyebrow {
   font-family:var(--font-heading);
-  letter-spacing:.14em;
+  letter-spacing:.2em;
   text-transform:uppercase;
-  color:var(--blue);
+  color:var(--blue-ink);
   font-size:13px;
   font-weight:700;
 }
 
 .eyebrow-light {
-  color:var(--blue-light);
+  color:var(--blue-on-dark);
 }
+
+/* The RESTORATION treatment. Rules use currentColor at .32 so the pattern
+   self-adapts to any surface without variant classes. */
+.rule-type {
+  display:flex; align-items:center; gap:16px;
+  font-family:var(--font-heading);
+  font-size:12.5px; font-weight:700;
+  letter-spacing:.3em; text-transform:uppercase; line-height:1;
+}
+
+.rule-type::before,.rule-type::after {
+  /* min-width is the floor: with a bare `flex:1 1 0` these collapse to zero
+     the moment the text wraps, silently deleting the brand's signature mark. */
+  content:""; flex:1 1 0; min-width:12px; height:1px;
+  background:currentColor; opacity:.32;
+}
+
+.rule-type::after { margin-left:-.3em; }  /* cancel trailing letter-space */
+
+.rule-type-center { justify-content:center; max-width:460px; margin-inline:auto; }
+
+.rule-type-start::before { display:none; }
+
+.rule-type-start::after  { flex:0 0 clamp(24px,7vw,72px); }
+
+/* Tracking decreases as size increases: .3em at 12.5px, .18em here.
+   The larger size needs a wider measure than .rule-type-center's 460px:
+   at 20px/.18em the manifesto lines exceed it, and because the hairlines are
+   `flex:1 1 0` siblings of the text they collapse to zero the moment the text
+   wraps — the signature device silently disappears. Widen the measure, scale
+   the type down on narrow screens, and give the rules a hard floor so they can
+   never vanish entirely. */
+.rule-type-lg {
+  font-size:clamp(14px,2.3vw,20px);
+  gap:clamp(12px,2vw,22px);
+  letter-spacing:.18em;
+  /* width:100% is load-bearing. `.manifesto` is a flex column, and the
+     `margin-inline:auto` these inherit from .rule-type-center cancels the
+     default stretch — leaving the row shrink-to-fit at ~548px, which is
+     narrower than the copy needs and forces the wrap this variant exists to
+     avoid. Fill the column, then cap the measure. */
+  width:100%;
+  max-width:820px;
+  margin-inline:auto;
+  text-align:center;
+}
+
+.rule-type-lg::before,.rule-type-lg::after { flex:0 1 clamp(20px,6vw,64px); }
+
+.rule-type-lg::after { margin-left:-.18em; }
 
 .site-header {
   z-index:50;
   position:sticky;
   top:0;
-  box-shadow:0 1px #14202e14;
+  box-shadow:var(--shadow-hairline);
 }
 
 .header-topbar {
   background:var(--navy);
-  color:#cfd8e0;
+  color:#cdd4dc;
   flex-wrap:wrap;
   justify-content:center;
   align-items:center;
@@ -152,7 +267,7 @@ input,textarea {
 }
 
 .header-topbar .dot {
-  background:var(--blue-light);
+  background:var(--blue-on-dark);
   border-radius:50%;
   width:7px;
   height:7px;
@@ -160,11 +275,11 @@ input,textarea {
 }
 
 .header-topbar .sep {
-  color:#8a97a5;
+  color:#79818b;
 }
 
 .header-topbar a {
-  color:var(--blue-light);
+  color:var(--blue-on-dark);
   font-weight:700;
 }
 
@@ -198,10 +313,10 @@ input,textarea {
 
 .header-logo-tag {
   font-family:var(--font-heading);
-  letter-spacing:.14em;
+  letter-spacing:.2em;
   color:var(--muted-2);
   text-transform:uppercase;
-  border-left:1px solid #d7dde3;
+  border-left:1px solid var(--rule);
   padding-left:12px;
   font-size:11px;
   font-weight:700;
@@ -218,7 +333,13 @@ input,textarea {
 }
 
 .header-nav a {
+  /* Bare links had no vertical padding, giving a ~17px tap target on touch
+     devices. min-height + centring lifts the hit box past 44px without
+     changing the visual position of the text. */
   color:var(--ink);
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
 }
 
 .header-nav a:hover {
@@ -226,17 +347,52 @@ input,textarea {
 }
 
 .header-nav a.active {
-  color:var(--blue);
+  color:var(--blue-ink);
 }
 
 .header-nav .btn-primary {
-  padding:11px 20px;
+  /* `.header-nav a` (0-1-1) outranks `.btn-primary` (0-1-0), so the button
+     inherits ink text on a blue fill unless colour is restated here. */
+  color:#fff;
+  padding:14px 20px;   /* 11px gave a 39px control, under the 44px touch floor */
   font-size:14px;
   font-weight:600;
 }
 
+.header-nav .btn-primary:hover {
+  color:#fff;
+}
+
+.tagline-strip {
+  background:#fff;
+  border-bottom:1px solid var(--border);
+}
+
+.tagline-strip-inner {
+  font-family:var(--font-heading);
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:10px 26px;
+  max-width:1160px;
+  margin:0 auto;
+  padding:18px 40px;
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.24em;
+  line-height:1;
+  display:flex;
+}
+
+.tag-blue { color:var(--blue-ink); }
+
+.tag-ink { color:var(--ink); }
+
+.tag-div { width:1px; height:14px; background:var(--rule); display:block; }
+
 .hero {
-  background:var(--navy);
+  background:var(--grad-hero);
   position:relative;
 }
 
@@ -266,18 +422,19 @@ input,textarea {
   max-width:760px;
   margin:0;
   font-size:52px;
-  font-weight:800;
-  line-height:1.12;
+  font-weight:900;
+  letter-spacing:-.022em;
+  line-height:1.06;
 }
 
 .hero-sub {
-  color:#cfd8e0;
+  color:#cdd4dc;
   margin:0;
   font-size:21px;
 }
 
 .hero-checks {
-  color:#e6ecf1;
+  color:#e3e8ee;
   flex-direction:column;
   gap:10px;
   font-size:17px;
@@ -329,12 +486,22 @@ input,textarea {
   margin:0;
   font-size:36px;
   font-weight:800;
+  letter-spacing:-.012em;
+  line-height:1.15;
 }
 
 .section-head p {
   color:var(--muted);
   margin:0;
   font-size:18px;
+}
+
+.manifesto {
+  background:var(--bg-light);
+  flex-direction:column;
+  gap:14px;
+  padding:56px 20px;
+  display:flex;
 }
 
 .services-grid {
@@ -356,7 +523,7 @@ input,textarea {
 .service-card:hover {
   border-color:var(--blue);
   color:var(--ink);
-  box-shadow:0 6px 20px #2e8fd81f;
+  box-shadow:var(--shadow-blue);
 }
 
 .service-card-icon {
@@ -384,7 +551,7 @@ input,textarea {
 }
 
 .service-card-link {
-  color:var(--blue);
+  color:var(--blue-ink);
   font-size:14.5px;
   font-weight:700;
 }
@@ -392,8 +559,8 @@ input,textarea {
 .service-card-cta {
   text-align:center;
   color:var(--ink);
-  background:#f7fafc;
-  border:1px dashed #b9c4cd;
+  background:var(--bg-subtle);
+  border:1px dashed #bfc6ce;
   border-radius:10px;
   flex-direction:column;
   justify-content:center;
@@ -414,7 +581,7 @@ input,textarea {
   font-family:var(--font-heading);
   border-radius:6px;
   padding:10px 20px;
-  font-size:14px;
+  font-size:15px;
   font-weight:600;
 }
 
@@ -441,6 +608,7 @@ input,textarea {
   margin:0;
   font-size:34px;
   font-weight:800;
+  letter-spacing:-.012em;
   line-height:1.2;
 }
 
@@ -461,7 +629,7 @@ input,textarea {
   border-radius:12px;
   width:100%;
   display:block;
-  box-shadow:0 10px 30px #14202e26;
+  box-shadow:var(--shadow-img);
 }
 
 .stats-row {
@@ -521,6 +689,7 @@ input,textarea {
   margin:0;
   font-size:34px;
   font-weight:800;
+  letter-spacing:-.012em;
   line-height:1.2;
 }
 
@@ -547,7 +716,7 @@ input,textarea {
 }
 
 .areas-link {
-  color:var(--blue);
+  color:var(--blue-ink);
   font-size:15.5px;
   font-weight:700;
 }
@@ -577,7 +746,7 @@ input,textarea {
 }
 
 .faq-intro {
-  color:#cfd8e0;
+  color:#cdd4dc;
   flex-direction:column;
   gap:16px;
   display:flex;
@@ -589,6 +758,7 @@ input,textarea {
   margin:0;
   font-size:34px;
   font-weight:800;
+  letter-spacing:-.012em;
   line-height:1.2;
 }
 
@@ -609,7 +779,7 @@ input,textarea {
 }
 
 .faq-item {
-  background:#ffffff0d;
+  background:#ffffff12;
   border:1px solid #ffffff1a;
   border-radius:10px;
   overflow:hidden;
@@ -631,13 +801,18 @@ input,textarea {
   display:flex;
 }
 
+.faq-question:focus-visible {
+  outline:2px solid var(--blue-on-dark);
+  outline-offset:-2px;
+}
+
 .faq-mark {
-  color:var(--blue-light);
+  color:var(--blue-on-dark);
   font-size:18px;
 }
 
 .faq-answer {
-  color:#b9c7d3;
+  color:#b4bcc6;
   margin:0;
   padding:0 20px 20px;
   font-size:15.5px;
@@ -662,12 +837,13 @@ input,textarea {
   font-family:var(--font-heading);
   margin:0;
   font-size:42px;
-  font-weight:800;
-  line-height:1.15;
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
 }
 
 .page-hero p {
-  color:#cfd8e0;
+  color:#cdd4dc;
   max-width:720px;
   margin:0;
   font-size:18px;
@@ -692,7 +868,7 @@ input,textarea {
 }
 
 .pill:hover {
-  border-color:var(--blue-light);
+  border-color:var(--blue-on-dark);
   color:#fff;
 }
 
@@ -734,6 +910,7 @@ input,textarea {
   margin:0;
   font-size:30px;
   font-weight:800;
+  letter-spacing:-.01em;
 }
 
 .service-detail-copy>p {
@@ -787,6 +964,7 @@ input,textarea {
   margin:0;
   font-size:32px;
   font-weight:800;
+  letter-spacing:-.01em;
   line-height:1.2;
 }
 
@@ -801,7 +979,7 @@ input,textarea {
   border-radius:12px;
   width:100%;
   display:block;
-  box-shadow:0 10px 30px #14202e26;
+  box-shadow:var(--shadow-img);
 }
 
 .about-grid-rev img {
@@ -828,10 +1006,6 @@ input,textarea {
   font-weight:700;
 }
 
-.check-list .light {
-  color:var(--muted-2);
-}
-
 .expect {
   background:var(--bg-light);
 }
@@ -847,6 +1021,7 @@ input,textarea {
   margin:0 0 36px;
   font-size:30px;
   font-weight:800;
+  letter-spacing:-.01em;
 }
 
 .expect-grid {
@@ -998,7 +1173,7 @@ input,textarea {
   gap:18px;
   padding:36px;
   display:flex;
-  box-shadow:0 8px 28px #14202e0f;
+  box-shadow:var(--shadow-card);
 }
 
 .form-stack {
@@ -1022,7 +1197,7 @@ input,textarea {
 }
 
 .form-field input,.form-field textarea {
-  border:1px solid #c8d2da;
+  border:1px solid var(--border-strong);
   border-radius:8px;
   outline:none;
   padding:12px 14px;
@@ -1035,14 +1210,15 @@ input,textarea {
 
 .form-field input:focus,.form-field textarea:focus {
   border-color:var(--blue);
+  box-shadow:var(--focus-ring);
 }
 
 .form-field input.invalid,.form-field textarea.invalid {
-  border-color:#c0392b;
+  border-color:var(--danger);
 }
 
 .form-error {
-  color:#c0392b;
+  color:var(--danger);
   font-size:14px;
   font-weight:600;
 }
@@ -1081,8 +1257,8 @@ input,textarea {
 }
 
 .form-success-icon {
-  color:#2c9e57;
-  background:#e8f6ec;
+  color:var(--success);
+  background:var(--success-tint);
   border-radius:50%;
   justify-content:center;
   align-items:center;
@@ -1113,9 +1289,14 @@ input,textarea {
 .form-reset {
   all:unset;
   cursor:pointer;
-  color:var(--blue);
+  color:var(--blue-ink);
   font-size:14.5px;
   font-weight:700;
+}
+
+.form-reset:focus-visible {
+  outline:2px solid var(--blue);
+  outline-offset:2px;
 }
 
 .contact-aside {
@@ -1125,7 +1306,7 @@ input,textarea {
 }
 
 .contact-call-card {
-  background:var(--navy);
+  background:var(--grad-signal);
   color:#fff;
   border-radius:14px;
   flex-direction:column;
@@ -1140,16 +1321,25 @@ input,textarea {
   font-weight:700;
 }
 
+/* On --grad-signal all text is #fff — a dimmed grey lands at 2.37:1 over the blue end. */
 .contact-call-card .sub {
-  color:#b9c7d3;
+  color:#fff;
   font-size:15px;
   line-height:1.6;
 }
 
+/* A near-black button on the gradient's dark end is invisible: invert it. */
 .contact-call-card .btn-primary {
+  background:#fff;
+  color:var(--blue-deep);
   margin-top:6px;
   padding:13px;
   font-size:17px;
+}
+
+.contact-call-card .btn-primary:hover {
+  background:var(--blue-tint);
+  color:var(--blue-deep);
 }
 
 .contact-info-card {
@@ -1222,6 +1412,7 @@ input,textarea {
   margin:0;
   font-size:38px;
   font-weight:800;
+  letter-spacing:-.015em;
 }
 
 .legal .updated {
@@ -1243,7 +1434,7 @@ input,textarea {
 }
 
 .footer-cta {
-  background:var(--blue);
+  background:var(--grad-signal);
   color:#fff;
   flex-wrap:wrap;
   justify-content:center;
@@ -1256,22 +1447,23 @@ input,textarea {
 .footer-cta-title {
   font-family:var(--font-heading);
   font-size:20px;
-  font-weight:700;
+  font-weight:800;
 }
 
+/* Companion override: the old near-black fill disappears into the gradient's dark end. */
 .footer-cta-btn {
-  background:var(--navy);
-  color:#fff;
+  background:#fff;
+  color:var(--blue-deep);
   font-family:var(--font-heading);
   border-radius:6px;
-  padding:12px 22px;
+  padding:14px 22px;   /* was 12px -> 41px control, under the 44px touch floor */
   font-size:14px;
   font-weight:600;
 }
 
 .footer-cta-btn:hover {
-  background:var(--navy-dark);
-  color:#fff;
+  background:var(--blue-tint);
+  color:var(--blue-deep);
 }
 
 .footer-cta-phone {
@@ -1279,7 +1471,7 @@ input,textarea {
   font-family:var(--font-heading);
   border:2px solid #fff9;
   border-radius:6px;
-  padding:10px 22px;
+  padding:13px 22px;   /* was 10px -> 39px control, under the 44px touch floor */
   font-size:14px;
   font-weight:600;
 }
@@ -1300,7 +1492,7 @@ input,textarea {
 }
 
 .site-footer a:hover {
-  color:var(--blue-light);
+  color:var(--blue-on-dark);
 }
 
 .footer-grid {
@@ -1317,14 +1509,7 @@ input,textarea {
   display:flex;
 }
 
-.footer-logo-plate {
-  background:#fff;
-  border-radius:8px;
-  align-self:flex-start;
-  padding:10px 14px;
-}
-
-.footer-logo-plate img {
+.footer-logo {
   width:auto;
   height:40px;
   display:block;
@@ -1336,9 +1521,25 @@ input,textarea {
   line-height:1.65;
 }
 
-.footer-brand .license {
-  color:#6d8093;
-  font-size:13px;
+.brand-signature {
+  font-family:var(--font-heading);
+  flex-direction:column;
+  gap:3px;
+  margin:0;
+  font-size:12.5px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  line-height:1.5;
+  display:flex;
+}
+
+.brand-signature span:first-child {
+  color:var(--on-dark-2);
+}
+
+.brand-signature span:last-child {
+  color:var(--blue-on-dark);
 }
 
 .footer-col {
@@ -1350,7 +1551,7 @@ input,textarea {
 
 .footer-col-title {
   font-family:var(--font-heading);
-  letter-spacing:.1em;
+  letter-spacing:.18em;
   text-transform:uppercase;
   color:#fff;
   margin-bottom:6px;
@@ -1358,17 +1559,26 @@ input,textarea {
   font-weight:700;
 }
 
+.footer-col-title::after {
+  content:"";
+  background:var(--blue-on-dark);
+  width:24px;
+  height:2px;
+  margin-top:8px;
+  display:block;
+}
+
 .footer-col .phone {
-  color:var(--blue-light);
+  color:var(--blue-on-dark);
   font-weight:700;
 }
 
 .footer-col .hours {
-  color:#6d8093;
+  color:#8a939d;
 }
 
 .footer-bottom {
-  border-top:1px solid #ffffff1a;
+  border-top:1px solid var(--rule-on-dark);
   flex-wrap:wrap;
   justify-content:space-between;
   gap:16px;
@@ -1388,6 +1598,14 @@ input,textarea {
   .services-grid,.expect-grid {
     grid-template-columns:repeat(2,1fr);
   }
+
+  /* The 4-column footer previously held all the way to 640px, squeezing the
+     brand column to ~177px at tablet width and breaking the two-line
+     signature into six with orphaned words. */
+  .footer-grid {
+    grid-template-columns:repeat(2,1fr);
+    gap:36px 44px;
+  }
   .why-us-grid,.areas-grid,.faq-grid,.about-grid,.about-grid-rev,.sa-grid,.contact-grid,.service-detail {
     grid-template-columns:1fr;
   }
@@ -1400,6 +1618,14 @@ input,textarea {
 }
 
 @media (max-width:640px) {
+  /* Tighter micro-caps so single-phrase rule-type labels stay on one line
+     (a wrap squeezes the flanking hairlines down to their min-width floor). */
+  .rule-type {
+    font-size:11px;
+    letter-spacing:.2em;
+    gap:10px;
+  }
+
   .container {
     padding-left:20px;
     padding-right:20px;
@@ -1409,6 +1635,7 @@ input,textarea {
   }
   .hero h1 {
     font-size:36px;
+    letter-spacing:-.013em;
   }
   .hero-sub {
     font-size:18px;
@@ -1418,6 +1645,7 @@ input,textarea {
   }
   .page-hero h1 {
     font-size:32px;
+    letter-spacing:-.012em;
   }
   .section {
     padding-top:56px;
@@ -1425,9 +1653,17 @@ input,textarea {
   }
   .section-head h2 {
     font-size:28px;
+    letter-spacing:-.007em;
   }
   .why-us-copy h2,.areas-copy h2,.faq-intro h2 {
     font-size:27px;
+    letter-spacing:-.007em;
+  }
+  .about-copy h2,.service-detail h2,.expect h2 {
+    letter-spacing:-.006em;
+  }
+  .legal h1 {
+    letter-spacing:-.009em;
   }
   .services-grid,.expect-grid,.form-row {
     grid-template-columns:1fr;
@@ -1439,6 +1675,19 @@ input,textarea {
   .header-nav {
     justify-content:center;
     gap:16px;
+  }
+  .tagline-strip-inner {
+    gap:8px 14px;
+    padding:14px 20px;
+    font-size:11px;
+    letter-spacing:.16em;
+  }
+  .tag-div {
+    display:none;
+  }
+  /* Gradient runs with the stacking direction once the band wraps. */
+  .footer-cta {
+    background:var(--grad-signal-wrap);
   }
   .footer-grid {
     grid-template-columns:1fr;

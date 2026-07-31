@@ -5,7 +5,7 @@ import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "About Us | Apex Restoration Bay Area",
   description:
-    "Apex Restoration is a family-owned water, flood, and mold restoration company now serving the San Francisco Bay Area. IICRC-certified, licensed, and available 24/7.",
+    "Apex Restoration is a family-owned water, flood, and mold restoration company now serving the San Francisco Bay Area. IICRC-certified, insured, and available 24/7.",
 };
 
 interface ExpectItem {
@@ -76,10 +76,18 @@ export default function AboutPage() {
             floor protection, shoe covers, and a clean, organized job site.
           </p>
         </div>
-        <img
-          src="/images/about-team.jpg"
-          alt="Apex Restoration technicians geared up on site"
-        />
+        <picture>
+          <source type="image/avif" srcSet="/images/about-team.avif" />
+          <source type="image/webp" srcSet="/images/about-team.webp" />
+          <img
+            src="/images/about-team.jpg"
+            alt="Apex Restoration technicians geared up on site"
+            width={1000}
+            height={1250}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       </div>
 
       <div className="expect">
@@ -97,11 +105,28 @@ export default function AboutPage() {
         </div>
       </div>
 
+      <div className="manifesto">
+        <p className="rule-type rule-type-center rule-type-lg tag-ink">
+          We restore more than property.
+        </p>
+        <p className="rule-type rule-type-center rule-type-lg tag-blue">
+          We restore peace of mind.
+        </p>
+      </div>
+
       <div className="container about-grid about-grid-rev">
-        <img
-          src="/images/about-finished.jpg"
-          alt="Clean restored kitchen and living area after mitigation"
-        />
+        <picture>
+          <source type="image/avif" srcSet="/images/about-finished.avif" />
+          <source type="image/webp" srcSet="/images/about-finished.webp" />
+          <img
+            src="/images/about-finished.jpg"
+            alt="Clean restored kitchen and living area after mitigation"
+            width={1200}
+            height={900}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
         <div className="about-copy">
           <h2>Built for California conditions</h2>
           <p>
@@ -117,10 +142,7 @@ export default function AboutPage() {
             </span>
             <span className="row">
               <span className="tick">✓</span>
-              <span>
-                CSLB licensed &amp; insured in California{" "}
-                <span className="light">(license # placeholder)</span>
-              </span>
+              Insured and IICRC-certified in California
             </span>
             <span className="row">
               <span className="tick">✓</span>

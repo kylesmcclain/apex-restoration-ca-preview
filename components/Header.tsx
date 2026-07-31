@@ -24,7 +24,7 @@ export default function Header() {
       </div>
       <div className="header-main">
         <Link href="/" className="header-logo" prefetch={false}>
-          <img src="/images/apex-logo.png" alt="Apex Restoration" />
+          <img src="/images/apex-logo.svg" alt="Apex Restoration" width={129} height={46} />
           <span className="header-logo-tag">Bay Area, CA</span>
         </Link>
         <nav className="header-nav">

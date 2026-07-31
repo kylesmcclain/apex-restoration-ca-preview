@@ -1,10 +1,8 @@
-import { ADDRESS_LINE1, ADDRESS_LINE2, PHONE_DISPLAY, SITE_URL } from "@/lib/constants";
+import { CITY, REGION, PHONE_DISPLAY, SITE_URL } from "@/lib/constants";
 
-// ADDRESS_LINE2 is "Oakland, CA 94601" — split it instead of re-hardcoding
-// the city/state/zip so this component still derives everything from
-// lib/constants.ts.
-const [addressLocality, regionZip] = ADDRESS_LINE2.split(", ");
-const [addressRegion, postalCode] = regionZip.split(" ");
+// Service-area business: no fixed street address is published, so this
+// derives a locality/region-only PostalAddress directly from lib/constants.ts
+// instead of a full street address.
 
 const LOCAL_BUSINESS_JSON_LD = {
   "@context": "https://schema.org",
@@ -14,10 +12,8 @@ const LOCAL_BUSINESS_JSON_LD = {
   url: SITE_URL,
   address: {
     "@type": "PostalAddress",
-    streetAddress: ADDRESS_LINE1,
-    addressLocality,
-    addressRegion,
-    postalCode,
+    addressLocality: CITY,
+    addressRegion: REGION,
     addressCountry: "US",
   },
   areaServed: {

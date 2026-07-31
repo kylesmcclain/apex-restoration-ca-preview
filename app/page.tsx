@@ -27,12 +27,52 @@ const AREA_CHIPS = [
 export default function Home() {
   return (
     <main>
+      {/*
+        Preload the hero's AVIF so the browser can start fetching it
+        immediately, without waiting to parse the <picture> below. Two
+        preloads mirror the <picture> art-direction media queries so the
+        right variant (960px on phones, full-width otherwise) is the one
+        actually preloaded — React 19 hoists <link> tags rendered anywhere
+        in the tree up into <head>.
+      */}
+      <link
+        rel="preload"
+        as="image"
+        type="image/avif"
+        href="/images/hero-960.avif"
+        media="(max-width: 640px)"
+      />
+      <link
+        rel="preload"
+        as="image"
+        type="image/avif"
+        href="/images/hero.avif"
+        media="(min-width: 641px)"
+      />
       <div className="hero">
-        <img
-          src="/images/hero.jpg"
-          alt="Apex Restoration technician working inside containment"
-          className="hero-bg"
-        />
+        <picture>
+          <source
+            media="(max-width: 640px)"
+            type="image/avif"
+            srcSet="/images/hero-960.avif"
+          />
+          <source
+            media="(max-width: 640px)"
+            type="image/webp"
+            srcSet="/images/hero-960.webp"
+          />
+          <source type="image/avif" srcSet="/images/hero.avif" />
+          <source type="image/webp" srcSet="/images/hero.webp" />
+          <img
+            src="/images/hero.jpg"
+            alt="Apex Restoration technician working inside containment"
+            className="hero-bg"
+            width={1920}
+            height={1080}
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
         <div className="hero-inner">
           <span className="eyebrow eyebrow-light">
             Now serving the San Francisco Bay Area
@@ -70,11 +110,21 @@ export default function Home() {
         </div>
       </div>
 
+      <div className="tagline-strip">
+        <div className="tagline-strip-inner">
+          <span className="tag-blue">Fast Response.</span>
+          <span className="tag-div" aria-hidden="true" />
+          <span className="tag-ink">Expert Care.</span>
+          <span className="tag-div" aria-hidden="true" />
+          <span className="tag-blue">Complete Restoration.</span>
+        </div>
+      </div>
+
       <div className="container section">
         <div className="section-head">
-          <span className="eyebrow">Our Services</span>
+          <span className="eyebrow rule-type rule-type-center">Our Services</span>
           <h2>Which service do you need?</h2>
-          <p>Get a licensed professional to come out today.</p>
+          <p>Get a certified professional to come out today.</p>
         </div>
         <div className="services-grid">
           {SERVICES.map((service) => (
@@ -103,7 +153,7 @@ export default function Home() {
       <div className="why-us">
         <div className="container section why-us-grid">
           <div className="why-us-copy">
-            <span className="eyebrow">Why Us</span>
+            <span className="eyebrow rule-type rule-type-start">Why Us</span>
             <h2>
               Why Bay Area homeowners trust Apex for water damage restoration
             </h2>
@@ -141,10 +191,18 @@ export default function Home() {
             </div>
           </div>
           <div className="why-us-media">
-            <img
-              src="/images/why-us.jpg"
-              alt="Apex technician scanning for hidden moisture with a thermal camera"
-            />
+            <picture>
+              <source type="image/avif" srcSet="/images/why-us.avif" />
+              <source type="image/webp" srcSet="/images/why-us.webp" />
+              <img
+                src="/images/why-us.jpg"
+                alt="Apex technician scanning for hidden moisture with a thermal camera"
+                width={1200}
+                height={900}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div className="stats-row">
               <div className="stat-card">
                 <span className="stat-value">
@@ -167,7 +225,7 @@ export default function Home() {
 
       <div className="container section areas-grid">
         <div className="areas-copy">
-          <span className="eyebrow">Service Areas</span>
+          <span className="eyebrow rule-type rule-type-start">Service Areas</span>
           <h2>Communities we serve across the Bay Area</h2>
           <p>
             From San Francisco and the Peninsula to the East Bay, South Bay,

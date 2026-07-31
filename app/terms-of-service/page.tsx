@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import {
   PHONE_DISPLAY,
   EMAIL,
-  ADDRESS_LINE1,
-  ADDRESS_LINE2,
+  LOCATION_LINE,
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -15,10 +14,7 @@ export default function TermsOfServicePage() {
   return (
     <main className="legal">
       <h1>Terms of Service</h1>
-      <p className="updated">
-        Last updated: July 2026 — placeholder copy; have your attorney review
-        before publishing.
-      </p>
+      <p className="updated">Last updated: July 2026</p>
 
       <h2>Use of this website</h2>
       <p>
@@ -47,7 +43,7 @@ export default function TermsOfServicePage() {
       <h2>Contact</h2>
       <p>
         Questions about these terms: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>{" "}
-        · {PHONE_DISPLAY} · {ADDRESS_LINE1}, {ADDRESS_LINE2}
+        · {PHONE_DISPLAY} · {LOCATION_LINE}
       </p>
     </main>
   );

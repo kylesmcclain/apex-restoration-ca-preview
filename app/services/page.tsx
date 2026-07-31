@@ -12,6 +12,13 @@ type ServiceCta =
   | { kind: "phone" }
   | { kind: "link"; href: string; label: string };
 
+// Swaps a photo's .jpg extension for .avif / .webp, so we can derive the
+// modern-format sibling paths from the single .jpg src stored on each
+// SERVICE_DETAILS entry.
+function withExtension(jpgSrc: string, extension: "avif" | "webp") {
+  return jpgSrc.replace(/\.jpg$/, `.${extension}`);
+}
+
 interface ServiceDetailData {
   id: string;
   pillLabel: string;
@@ -157,7 +164,24 @@ export default function ServicesPage() {
         {SERVICE_DETAILS.map((service) => (
           <div key={service.id} id={service.id} className="service-detail">
             {service.imageFirst && (
-              <img src={service.image.src} alt={service.image.alt} />
+              <picture>
+                <source
+                  type="image/avif"
+                  srcSet={withExtension(service.image.src, "avif")}
+                />
+                <source
+                  type="image/webp"
+                  srcSet={withExtension(service.image.src, "webp")}
+                />
+                <img
+                  src={service.image.src}
+                  alt={service.image.alt}
+                  width={1200}
+                  height={900}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             )}
             <div className="service-detail-copy">
               <span className="service-detail-icon">{service.icon}</span>
@@ -183,7 +207,24 @@ export default function ServicesPage() {
               )}
             </div>
             {!service.imageFirst && (
-              <img src={service.image.src} alt={service.image.alt} />
+              <picture>
+                <source
+                  type="image/avif"
+                  srcSet={withExtension(service.image.src, "avif")}
+                />
+                <source
+                  type="image/webp"
+                  srcSet={withExtension(service.image.src, "webp")}
+                />
+                <img
+                  src={service.image.src}
+                  alt={service.image.alt}
+                  width={1200}
+                  height={900}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             )}
           </div>
         ))}

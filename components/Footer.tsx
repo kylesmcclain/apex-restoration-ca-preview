@@ -1,12 +1,11 @@
 import Link from "next/link";
 import {
-  ADDRESS_LINE1,
-  ADDRESS_LINE2,
   EMAIL,
-  LICENSE_LINE,
+  LOCATION_LINE,
   NAV,
   PHONE_DISPLAY,
   PHONE_HREF,
+  SERVICE_AREA_LINE,
   SERVICES,
 } from "@/lib/constants";
 
@@ -27,17 +26,24 @@ export default function Footer() {
       <div className="site-footer">
         <div className="footer-grid">
           <div className="footer-brand">
-            <div className="footer-logo-plate">
-              <img src="/images/apex-logo.png" alt="Apex Restoration" />
-            </div>
+            <img
+              className="footer-logo"
+              src="/images/apex-logo-light.svg"
+              alt="Apex Restoration"
+              width={112}
+              height={40}
+            />
             <p>
               Apex Restoration is a family-owned water, flood, and mold
-              restoration company serving the San Francisco Bay Area. Licensed
-              and insured, available 24/7, and at your door within the hour to
+              restoration company serving the San Francisco Bay Area.
+              Insured, available 24/7, and at your door within the hour to
               handle your emergency and your insurance claim from start to
               finish.
             </p>
-            <p className="license">{LICENSE_LINE}</p>
+            <p className="brand-signature">
+              <span>We restore more than property.</span>
+              <span>We restore peace of mind.</span>
+            </p>
           </div>
           <div className="footer-col">
             <span className="footer-col-title">Navigate</span>
@@ -65,9 +71,9 @@ export default function Footer() {
           <div className="footer-col">
             <span className="footer-col-title">Contact Us</span>
             <span>
-              {ADDRESS_LINE1}
+              {LOCATION_LINE}
               <br />
-              {ADDRESS_LINE2}
+              {SERVICE_AREA_LINE}
             </span>
             <a href={PHONE_HREF} className="phone">
               {PHONE_DISPLAY}
