@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import QuoteForm from "@/components/QuoteForm";
 import {
-  ADDRESS_LINE1,
-  ADDRESS_LINE2,
   EMAIL,
+  LOCATION_LINE,
   PHONE_DISPLAY,
   PHONE_HREF,
+  SERVICE_AREA_LINE,
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -32,6 +32,9 @@ export default function ContactPage() {
         <QuoteForm />
         <div className="contact-aside">
           <div className="contact-call-card">
+            <span className="rule-type" style={{ color: "#fff" }}>
+              24/7 Emergency Service
+            </span>
             <span className="title">Speak with the Apex team now</span>
             <span className="sub">
               Call for immediate assistance and same-hour dispatch.
@@ -43,9 +46,9 @@ export default function ContactPage() {
           <div className="contact-info-card">
             <span className="title">Apex Restoration — Bay Area</span>
             <span className="addr">
-              {ADDRESS_LINE1}
+              {LOCATION_LINE}
               <br />
-              {ADDRESS_LINE2}
+              {SERVICE_AREA_LINE}
             </span>
             <a href={`mailto:${EMAIL}`} className="email">
               {EMAIL}

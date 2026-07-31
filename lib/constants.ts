@@ -1,10 +1,10 @@
 export const PHONE_DISPLAY = "(510) 925-7538";
 export const PHONE_HREF = "tel:5109257538";
 export const EMAIL = "ApexrestorationCA@yahoo.com";
-export const ADDRESS_LINE1 = "1200 Placeholder Way";
-export const ADDRESS_LINE2 = "Oakland, CA 94601";
-export const LICENSE_LINE =
-  "CSLB License #0000000 (placeholder) · IICRC Certified";
+export const CITY = "Oakland";
+export const REGION = "CA";
+export const LOCATION_LINE = "Oakland, CA";
+export const SERVICE_AREA_LINE = "Serving the San Francisco Bay Area";
 export const SITE_URL = "https://apexrestorationca.com";
 
 export interface NavItem {

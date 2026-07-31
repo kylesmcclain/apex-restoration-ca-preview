@@ -46,7 +46,7 @@ wrangler.jsonc      # Cloudflare Workers configuration
 open-next.config.ts # OpenNext adapter configuration
 ```
 
-To change the phone number, email, address, or license number, edit
+To change the phone number, email, or address, edit
 `lib/constants.ts` — every page reads from it.
 
 ## Domains
@@ -60,6 +60,4 @@ production domain; they are not part of the application.
 
 ## Pending business items
 
-- Replace the placeholder CSLB license number in `lib/constants.ts` (`LICENSE_LINE`) and `app/about/page.tsx`.
-- Replace the placeholder street address (`1200 Placeholder Way`).
 - Have an attorney review the privacy policy and terms of service copy.

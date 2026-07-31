@@ -9,7 +9,7 @@ import { SITE_URL } from "@/lib/constants";
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["600", "700", "800", "900"],
   display: "swap",
 });
 

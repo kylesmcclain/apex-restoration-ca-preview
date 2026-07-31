@@ -70,11 +70,21 @@ export default function Home() {
         </div>
       </div>
 
+      <div className="tagline-strip">
+        <div className="tagline-strip-inner">
+          <span className="tag-blue">Fast Response.</span>
+          <span className="tag-div" aria-hidden="true" />
+          <span className="tag-ink">Expert Care.</span>
+          <span className="tag-div" aria-hidden="true" />
+          <span className="tag-blue">Complete Restoration.</span>
+        </div>
+      </div>
+
       <div className="container section">
         <div className="section-head">
-          <span className="eyebrow">Our Services</span>
+          <span className="eyebrow rule-type rule-type-center">Our Services</span>
           <h2>Which service do you need?</h2>
-          <p>Get a licensed professional to come out today.</p>
+          <p>Get a certified professional to come out today.</p>
         </div>
         <div className="services-grid">
           {SERVICES.map((service) => (
@@ -103,7 +113,7 @@ export default function Home() {
       <div className="why-us">
         <div className="container section why-us-grid">
           <div className="why-us-copy">
-            <span className="eyebrow">Why Us</span>
+            <span className="eyebrow rule-type rule-type-start">Why Us</span>
             <h2>
               Why Bay Area homeowners trust Apex for water damage restoration
             </h2>
@@ -167,7 +177,7 @@ export default function Home() {
 
       <div className="container section areas-grid">
         <div className="areas-copy">
-          <span className="eyebrow">Service Areas</span>
+          <span className="eyebrow rule-type rule-type-start">Service Areas</span>
           <h2>Communities we serve across the Bay Area</h2>
           <p>
             From San Francisco and the Peninsula to the East Bay, South Bay,

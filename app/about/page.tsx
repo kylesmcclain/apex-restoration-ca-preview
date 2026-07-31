@@ -5,7 +5,7 @@ import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "About Us | Apex Restoration Bay Area",
   description:
-    "Apex Restoration is a family-owned water, flood, and mold restoration company now serving the San Francisco Bay Area. IICRC-certified, licensed, and available 24/7.",
+    "Apex Restoration is a family-owned water, flood, and mold restoration company now serving the San Francisco Bay Area. IICRC-certified, insured, and available 24/7.",
 };
 
 interface ExpectItem {
@@ -97,6 +97,15 @@ export default function AboutPage() {
         </div>
       </div>
 
+      <div className="manifesto">
+        <p className="rule-type rule-type-center rule-type-lg tag-ink">
+          We restore more than property.
+        </p>
+        <p className="rule-type rule-type-center rule-type-lg tag-blue">
+          We restore peace of mind.
+        </p>
+      </div>
+
       <div className="container about-grid about-grid-rev">
         <img
           src="/images/about-finished.jpg"
@@ -117,10 +126,7 @@ export default function AboutPage() {
             </span>
             <span className="row">
               <span className="tick">✓</span>
-              <span>
-                CSLB licensed &amp; insured in California{" "}
-                <span className="light">(license # placeholder)</span>
-              </span>
+              Insured and IICRC-certified in California
             </span>
             <span className="row">
               <span className="tick">✓</span>

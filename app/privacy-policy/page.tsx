@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PHONE_DISPLAY, EMAIL, ADDRESS_LINE1, ADDRESS_LINE2 } from "@/lib/constants";
+import { PHONE_DISPLAY, EMAIL, LOCATION_LINE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Apex Restoration Bay Area",
@@ -42,7 +42,7 @@ export default function PrivacyPolicyPage() {
 
       <h2>Contact</h2>
       <p>
-        Apex Restoration, {ADDRESS_LINE1}, {ADDRESS_LINE2} · {PHONE_DISPLAY}
+        Apex Restoration · {LOCATION_LINE} · {PHONE_DISPLAY}
       </p>
     </main>
   );

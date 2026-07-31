@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  ADDRESS_LINE1,
-  ADDRESS_LINE2,
+  LOCATION_LINE,
   PHONE_DISPLAY,
   PHONE_HREF,
+  SERVICE_AREA_LINE,
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -146,7 +146,7 @@ export default function ServiceAreasPage() {
               Apex Restoration — Bay Area
             </span>
             <span className="addr">
-              {ADDRESS_LINE1}, {ADDRESS_LINE2}
+              {LOCATION_LINE} · {SERVICE_AREA_LINE}
             </span>
             <a href={PHONE_HREF} className="phone">
               {PHONE_DISPLAY}
