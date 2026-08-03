@@ -1692,7 +1692,8 @@ input,textarea {
     gap:32px;
   }
   .site-footer {
-    padding:40px 20px 20px;
+    /* Bottom padding keeps the footer links clear of the fixed call bar. */
+    padding:40px 20px 84px;
   }
   .legal {
     padding:48px 20px;
