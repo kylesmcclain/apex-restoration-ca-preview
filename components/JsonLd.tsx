@@ -1,30 +1,39 @@
-import { ADDRESS_LINE1, ADDRESS_LINE2, PHONE_DISPLAY, SITE_URL } from "@/lib/constants";
-
-// ADDRESS_LINE2 is "Oakland, CA 94601" — split it instead of re-hardcoding
-// the city/state/zip so this component still derives everything from
-// lib/constants.ts.
-const [addressLocality, regionZip] = ADDRESS_LINE2.split(", ");
-const [addressRegion, postalCode] = regionZip.split(" ");
+import { PHONE_E164, SITE_URL } from "@/lib/constants";
 
 const LOCAL_BUSINESS_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": SITE_URL,
   name: "Apex Restoration",
-  telephone: PHONE_DISPLAY,
+  telephone: PHONE_E164,
   url: SITE_URL,
+  image: `${SITE_URL}/images/work/crawlspace-water-extraction.jpg`,
+  // Street address intentionally omitted until the business confirms one —
+  // publishing a placeholder address would hurt trust and local SEO.
   address: {
     "@type": "PostalAddress",
-    streetAddress: ADDRESS_LINE1,
-    addressLocality,
-    addressRegion,
-    postalCode,
+    addressLocality: "Oakland",
+    addressRegion: "CA",
     addressCountry: "US",
   },
   areaServed: {
     "@type": "Place",
     name: "San Francisco Bay Area",
   },
-  openingHours: "Mo-Su 00:00-23:59",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "00:00",
+    closes: "23:59",
+  },
 };
 
 /**

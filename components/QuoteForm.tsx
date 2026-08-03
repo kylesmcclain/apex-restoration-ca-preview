@@ -85,8 +85,8 @@ export default function QuoteForm() {
         <span className="form-success-icon">✓</span>
         <span className="form-success-title">Request received</span>
         <p className="form-success-text">
-          We&apos;ll be in touch within 5 minutes. For an active emergency,
-          call <a href={PHONE_HREF}>{PHONE_DISPLAY}</a> now.
+          We&apos;ll call you right back. For an active emergency, call{" "}
+          <a href={PHONE_HREF}>{PHONE_DISPLAY}</a> now.
         </p>
         <button type="button" className="form-reset" onClick={handleReset}>
           Send another request
@@ -123,6 +123,8 @@ export default function QuoteForm() {
               autoComplete="given-name"
               value={form.firstName}
               onChange={handleChange}
+              aria-required="true"
+              aria-invalid={Boolean(error && !form.firstName.trim())}
               className={error && !form.firstName.trim() ? "invalid" : ""}
             />
           </label>
@@ -134,6 +136,8 @@ export default function QuoteForm() {
               autoComplete="family-name"
               value={form.lastName}
               onChange={handleChange}
+              aria-required="true"
+              aria-invalid={Boolean(error && !form.lastName.trim())}
               className={error && !form.lastName.trim() ? "invalid" : ""}
             />
           </label>
@@ -148,6 +152,8 @@ export default function QuoteForm() {
               autoComplete="email"
               value={form.email}
               onChange={handleChange}
+              aria-required="true"
+              aria-invalid={Boolean(error && !form.email.trim())}
               className={error && !form.email.trim() ? "invalid" : ""}
             />
           </label>
@@ -160,6 +166,8 @@ export default function QuoteForm() {
               autoComplete="tel"
               value={form.phone}
               onChange={handleChange}
+              aria-required="true"
+              aria-invalid={Boolean(error && !form.phone.trim())}
               className={error && !form.phone.trim() ? "invalid" : ""}
             />
           </label>
@@ -172,15 +180,21 @@ export default function QuoteForm() {
             rows={4}
             value={form.message}
             onChange={handleChange}
+            aria-required="true"
+            aria-invalid={Boolean(error && !form.message.trim())}
             className={error && !form.message.trim() ? "invalid" : ""}
           />
         </label>
-        {error && <span className="form-error">{error}</span>}
+        {error && (
+          <span className="form-error" role="alert">
+            {error}
+          </span>
+        )}
         <button type="submit" className="form-submit">
           Get My Free Quote
         </button>
         <span className="form-note">
-          Once you submit the form, we&apos;ll be in touch within 5 minutes.
+          Submit the form and we&apos;ll call you right back — 24/7.
         </span>
       </div>
     </form>

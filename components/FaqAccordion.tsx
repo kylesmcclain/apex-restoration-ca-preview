@@ -14,12 +14,19 @@ export default function FaqAccordion() {
             type="button"
             className="faq-question"
             aria-expanded={open === i}
+            aria-controls={`faq-panel-${i}`}
             onClick={() => setOpen(open === i ? -1 : i)}
           >
             {faq.q}
-            <span className="faq-mark">{open === i ? "−" : "+"}</span>
+            <span className="faq-mark" aria-hidden="true">
+              {open === i ? "−" : "+"}
+            </span>
           </button>
-          {open === i && <p className="faq-answer">{faq.a}</p>}
+          {open === i && (
+            <p className="faq-answer" id={`faq-panel-${i}`}>
+              {faq.a}
+            </p>
+          )}
         </div>
       ))}
     </div>

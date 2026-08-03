@@ -9,6 +9,9 @@ import {
 export const metadata: Metadata = {
   title: "Terms of Service | Apex Restoration Bay Area",
   description: "Apex Restoration Bay Area terms of service.",
+  alternates: {
+    canonical: "/terms-of-service",
+  },
 };
 
 export default function TermsOfServicePage() {

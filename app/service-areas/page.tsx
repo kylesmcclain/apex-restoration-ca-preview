@@ -11,6 +11,14 @@ export const metadata: Metadata = {
   title: "Service Areas | Apex Restoration Bay Area",
   description:
     "Apex Restoration serves the entire San Francisco Bay Area — San Francisco, the Peninsula, East Bay, South Bay, Tri-Valley, and North Bay — 24/7 with 60-minute response.",
+  alternates: {
+    canonical: "/service-areas",
+  },
+  openGraph: {
+    title: "Service Areas | Apex Restoration Bay Area",
+    description: "Apex Restoration serves the entire San Francisco Bay Area — San Francisco, the Peninsula, East Bay, South Bay, Tri-Valley, and North Bay — 24/7 with 60-minute response.",
+    url: "/service-areas",
+  },
 };
 
 interface SaRegion {
@@ -128,8 +136,8 @@ export default function ServiceAreasPage() {
           ))}
           <p className="sa-note">
             Don&apos;t see your city? We take jobs throughout the nine-county
-            Bay Area — <a href={PHONE_HREF}>call {PHONE_DISPLAY}</a>
-            and we&apos;ll confirm coverage on the spot.
+            Bay Area — <a href={PHONE_HREF}>call {PHONE_DISPLAY}</a> and
+            we&apos;ll confirm coverage on the spot.
           </p>
         </div>
 
@@ -146,7 +154,9 @@ export default function ServiceAreasPage() {
               Apex Restoration — Bay Area
             </span>
             <span className="addr">
-              {ADDRESS_LINE1}, {ADDRESS_LINE2}
+              {ADDRESS_LINE1}
+              <br />
+              {ADDRESS_LINE2}
             </span>
             <a href={PHONE_HREF} className="phone">
               {PHONE_DISPLAY}
@@ -155,7 +165,7 @@ export default function ServiceAreasPage() {
               Open 24 hours — every day of the year
             </span>
             <Link href="/contact" className="btn btn-primary" prefetch={false}>
-              Get my free quote
+              Get a Free Quote
             </Link>
           </div>
         </div>

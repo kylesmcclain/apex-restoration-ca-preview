@@ -10,8 +10,15 @@ import {
 
 export const metadata: Metadata = {
   title: "Contact Us — Free Quote | Apex Restoration Bay Area",
-  description:
-    "Get a free water damage restoration quote in minutes. Call (510) 925-7538 for immediate 24/7 dispatch anywhere in the San Francisco Bay Area.",
+  description: `Get a free water damage restoration quote in minutes. Call ${PHONE_DISPLAY} for immediate 24/7 dispatch anywhere in the San Francisco Bay Area.`,
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact Us — Free Quote | Apex Restoration Bay Area",
+    description: `Get a free water damage restoration quote in minutes. Call ${PHONE_DISPLAY} for immediate 24/7 dispatch anywhere in the San Francisco Bay Area.`,
+    url: "/contact",
+  },
 };
 
 export default function ContactPage() {
@@ -22,8 +29,9 @@ export default function ContactPage() {
           <span className="eyebrow eyebrow-light">Get Your Quote</span>
           <h1>Get a free quote in minutes</h1>
           <p>
-            Submit the form and we&apos;ll be in touch within 5 minutes — or
-            call now for immediate dispatch anywhere in the Bay Area.
+            Submit the form and we&apos;ll call you right back — or skip the
+            wait and call now for immediate 24/7 dispatch anywhere in the Bay
+            Area.
           </p>
         </div>
       </div>

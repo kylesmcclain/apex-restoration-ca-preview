@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import FaqAccordion from "@/components/FaqAccordion";
+import ProcessSection from "@/components/ProcessSection";
 import { PHONE_DISPLAY, PHONE_HREF, SERVICES } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title:
     "Apex Restoration | 24/7 Water Damage Restoration — San Francisco Bay Area",
-  description:
-    "24/7 water damage restoration, flood cleanup, and mold remediation across the San Francisco Bay Area. At your door within 1 hour. We handle your insurance claim. Call (510) 925-7538.",
+  description: `24/7 water damage restoration, flood cleanup, and mold remediation across the San Francisco Bay Area. At your door within 1 hour. We handle your insurance claim. Call ${PHONE_DISPLAY}.`,
 };
 
 const AREA_CHIPS = [
@@ -30,14 +30,20 @@ export default function Home() {
       <div className="hero">
         <img
           src="/images/hero.jpg"
+          srcSet="/images/hero-960.jpg 960w, /images/hero.jpg 1920w"
+          sizes="100vw"
           alt="Apex Restoration technician working inside containment"
           className="hero-bg"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="hero-inner">
           <span className="eyebrow eyebrow-light">
             Now serving the San Francisco Bay Area
           </span>
-          <h1>24/7 Water Damage Restoration & Cleanup Experts</h1>
+          <h1>24/7 Water Damage Restoration — At Your Door in 60 Minutes</h1>
           <p className="hero-sub">
             Serving San Francisco, Oakland, San Jose & the greater Bay Area
           </p>
@@ -64,7 +70,7 @@ export default function Home() {
               className="btn btn-ghost-light"
               prefetch={false}
             >
-              Request a Free Quote
+              Get a Free Quote
             </Link>
           </div>
         </div>
@@ -95,7 +101,7 @@ export default function Home() {
             <span className="service-card-desc">
               Get a free inspection — we&apos;ll assess it on site.
             </span>
-            <span className="mini-btn">Get a free quote</span>
+            <span className="mini-btn">Get a Free Quote</span>
           </Link>
         </div>
       </div>
@@ -109,10 +115,10 @@ export default function Home() {
             </h2>
             <p>
               As a family-owned company, Apex Restoration works for you, not
-              your insurance carrier. Our specialists make the first claim
-              call alongside you, handle the moisture and psychrometric
-              readings, and direct-bill the carrier so you never risk saying
-              something that jeopardizes your coverage.
+              your insurance carrier. We make the first claim call with you,
+              document the loss with moisture readings and photos, and bill
+              your carrier directly — so the claim is handled right from
+              minute one.
             </p>
             <p>
               When an atmospheric river sends water into your Oakland crawl
@@ -136,14 +142,20 @@ export default function Home() {
                 className="btn btn-outline"
                 prefetch={false}
               >
-                Get my free quote
+                Get a Free Quote
               </Link>
             </div>
           </div>
           <div className="why-us-media">
             <img
-              src="/images/why-us.jpg"
-              alt="Apex technician scanning for hidden moisture with a thermal camera"
+              src="/images/work/thermal-imaging-inspection.jpg"
+              srcSet="/images/work/thermal-imaging-inspection-800.jpg 600w, /images/work/thermal-imaging-inspection.jpg 1200w"
+              sizes="(max-width: 1000px) 100vw, 45vw"
+              alt="Apex technician scanning a bedroom for hidden moisture with a FLIR thermal camera"
+              width={1200}
+              height={1600}
+              loading="lazy"
+              decoding="async"
             />
             <div className="stats-row">
               <div className="stat-card">
@@ -164,6 +176,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <ProcessSection />
 
       <div className="container section areas-grid">
         <div className="areas-copy">
