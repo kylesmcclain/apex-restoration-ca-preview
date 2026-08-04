@@ -1,10 +1,14 @@
 export const PHONE_DISPLAY = "(510) 925-7538";
-export const PHONE_HREF = "tel:5109257538";
+export const PHONE_HREF = "tel:+15109257538";
+export const PHONE_E164 = "+15109257538";
 export const EMAIL = "ApexrestorationCA@yahoo.com";
-export const ADDRESS_LINE1 = "1200 Placeholder Way";
-export const ADDRESS_LINE2 = "Oakland, CA 94601";
-export const LICENSE_LINE =
-  "CSLB License #0000000 (placeholder) · IICRC Certified";
+// TODO: replace with the real street address before publishing one — never
+// show a fabricated address. Until then the site says "serving the Bay Area".
+export const ADDRESS_LINE1 = "Serving the entire Bay Area";
+export const ADDRESS_LINE2 = "Based in Oakland, CA";
+// TODO: append the real CSLB license number before launch — do not publish a
+// placeholder number.
+export const LICENSE_LINE = "IICRC Certified · CSLB license on request";
 export const SITE_URL = "https://apexrestorationca.com";
 
 export interface NavItem {

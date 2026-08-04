@@ -4,6 +4,9 @@ import { PHONE_DISPLAY, EMAIL, ADDRESS_LINE1, ADDRESS_LINE2 } from "@/lib/consta
 export const metadata: Metadata = {
   title: "Privacy Policy | Apex Restoration Bay Area",
   description: "Apex Restoration Bay Area privacy policy.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
 };
 
 export default function PrivacyPolicyPage() {

@@ -4,7 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
-import { SITE_URL } from "@/lib/constants";
+import StickyCallBar from "@/components/StickyCallBar";
+import { PHONE_DISPLAY, SITE_URL } from "@/lib/constants";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -20,14 +21,38 @@ const sourceSans = Source_Sans_3({
   display: "swap",
 });
 
+const SITE_TITLE =
+  "Apex Restoration | 24/7 Water Damage Restoration — San Francisco Bay Area";
+const SITE_DESCRIPTION = `24/7 water damage restoration, flood cleanup, and mold remediation across the San Francisco Bay Area. At your door within 1 hour. We handle your insurance claim. Call ${PHONE_DISPLAY}.`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title:
-    "Apex Restoration | 24/7 Water Damage Restoration — San Francisco Bay Area",
-  description:
-    "24/7 water damage restoration, flood cleanup, and mold remediation across the San Francisco Bay Area. At your door within 1 hour. We handle your insurance claim. Call (510) 925-7538.",
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   icons: {
     icon: "/favicon.ico",
+  },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: "Apex Restoration",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/images/work/crawlspace-water-extraction.jpg",
+        width: 1600,
+        height: 1200,
+        alt: "Apex Restoration crew extracting flood water from a crawl space",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
@@ -39,9 +64,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${montserrat.variable} ${sourceSans.variable}`}>
       <body>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
         <Header />
-        {children}
+        <div id="main">{children}</div>
         <Footer />
+        <StickyCallBar />
         <JsonLd />
       </body>
     </html>

@@ -8,7 +8,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <div className="site-header">
+    <header className="site-header">
       <div className="header-topbar">
         <span className="header-topbar-item">
           <span className="dot" />
@@ -19,15 +19,21 @@ export default function Header() {
         </span>
         <span className="sep">|</span>
         <span>
-          Call or Text 24/7 <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>
+          Call 24/7 — a real person answers{" "}
+          <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>
         </span>
       </div>
       <div className="header-main">
         <Link href="/" className="header-logo" prefetch={false}>
-          <img src="/images/apex-logo.png" alt="Apex Restoration" />
+          <img
+            src="/images/apex-logo-320.png"
+            alt="Apex Restoration"
+            width={320}
+            height={114}
+          />
           <span className="header-logo-tag">Bay Area, CA</span>
         </Link>
-        <nav className="header-nav">
+        <nav className="header-nav" aria-label="Main">
           {NAV.map((item) => (
             <Link
               key={item.href}
@@ -43,6 +49,6 @@ export default function Header() {
           </a>
         </nav>
       </div>
-    </div>
+    </header>
   );
 }

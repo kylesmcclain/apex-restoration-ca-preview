@@ -6,6 +6,14 @@ export const metadata: Metadata = {
   title: "About Us | Apex Restoration Bay Area",
   description:
     "Apex Restoration is a family-owned water, flood, and mold restoration company now serving the San Francisco Bay Area. IICRC-certified, licensed, and available 24/7.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About Us | Apex Restoration Bay Area",
+    description: "Apex Restoration is a family-owned water, flood, and mold restoration company now serving the San Francisco Bay Area. IICRC-certified, licensed, and available 24/7.",
+    url: "/about",
+  },
 };
 
 interface ExpectItem {
@@ -79,6 +87,10 @@ export default function AboutPage() {
         <img
           src="/images/about-team.jpg"
           alt="Apex Restoration technicians geared up on site"
+          width={1000}
+          height={1250}
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
@@ -99,8 +111,14 @@ export default function AboutPage() {
 
       <div className="container about-grid about-grid-rev">
         <img
-          src="/images/about-finished.jpg"
-          alt="Clean restored kitchen and living area after mitigation"
+          src="/images/work/containment-taping.jpg"
+          srcSet="/images/work/containment-taping-800.jpg 600w, /images/work/containment-taping.jpg 1200w"
+          sizes="(max-width: 1000px) 100vw, 45vw"
+          alt="Apex technician in protective gear sealing ceiling containment on a Bay Area job"
+          width={1200}
+          height={1600}
+          loading="lazy"
+          decoding="async"
         />
         <div className="about-copy">
           <h2>Built for California conditions</h2>
@@ -117,10 +135,7 @@ export default function AboutPage() {
             </span>
             <span className="row">
               <span className="tick">✓</span>
-              <span>
-                CSLB licensed &amp; insured in California{" "}
-                <span className="light">(license # placeholder)</span>
-              </span>
+              Licensed &amp; insured in California
             </span>
             <span className="row">
               <span className="tick">✓</span>
@@ -140,7 +155,7 @@ export default function AboutPage() {
               className="btn btn-outline"
               prefetch={false}
             >
-              Get my free quote
+              Get a Free Quote
             </Link>
           </div>
         </div>

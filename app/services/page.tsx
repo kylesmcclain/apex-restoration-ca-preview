@@ -6,6 +6,14 @@ export const metadata: Metadata = {
   title: "Restoration Services | Apex Restoration Bay Area",
   description:
     "Water damage restoration, mold remediation, flood cleanup, sewage cleanup, and storm damage restoration for the San Francisco Bay Area. Free inspections, 24/7.",
+  alternates: {
+    canonical: "/services",
+  },
+  openGraph: {
+    title: "Restoration Services | Apex Restoration Bay Area",
+    description: "Water damage restoration, mold remediation, flood cleanup, sewage cleanup, and storm damage restoration for the San Francisco Bay Area. Free inspections, 24/7.",
+    url: "/services",
+  },
 };
 
 type ServiceCta =
@@ -20,7 +28,7 @@ interface ServiceDetailData {
   intro: string;
   bullets: string[];
   imageFirst: boolean;
-  image: { src: string; alt: string };
+  image: { src: string; alt: string; width: number; height: number };
   cta: ServiceCta;
 }
 
@@ -40,8 +48,10 @@ const SERVICE_DETAILS: ServiceDetailData[] = [
     ],
     imageFirst: false,
     image: {
-      src: "/images/water-damage.jpg",
-      alt: "Kitchen water damage mitigation equipment and containment",
+      src: "/images/work/crawlspace-water-extraction.jpg",
+      alt: "Apex technician extracting standing water from a flooded crawl space",
+      width: 1600,
+      height: 1200,
     },
     cta: { kind: "phone" },
   },
@@ -60,8 +70,10 @@ const SERVICE_DETAILS: ServiceDetailData[] = [
     ],
     imageFirst: true,
     image: {
-      src: "/images/mold.jpg",
-      alt: "Technician removing mold-contaminated material under containment",
+      src: "/images/work/hepa-vacuum-containment.jpg",
+      alt: "Technician HEPA-vacuuming a ceiling inside sealed negative-pressure containment",
+      width: 1200,
+      height: 1600,
     },
     cta: {
       kind: "link",
@@ -84,8 +96,10 @@ const SERVICE_DETAILS: ServiceDetailData[] = [
     ],
     imageFirst: false,
     image: {
-      src: "/images/flood.jpg",
-      alt: "Technician working in a flooded crawl space",
+      src: "/images/work/flood-cut-drydown.jpg",
+      alt: "Flood-cut walls opened and drying after flood water removal",
+      width: 1600,
+      height: 1200,
     },
     cta: { kind: "phone" },
   },
@@ -104,8 +118,10 @@ const SERVICE_DETAILS: ServiceDetailData[] = [
     ],
     imageFirst: true,
     image: {
-      src: "/images/sewage.jpg",
-      alt: "Sewage cleanup in progress",
+      src: "/images/work/damaged-beam-removal.jpg",
+      alt: "Technician in full-face respirator removing a contaminated structural beam",
+      width: 1200,
+      height: 1600,
     },
     cta: { kind: "phone" },
   },
@@ -124,12 +140,30 @@ const SERVICE_DETAILS: ServiceDetailData[] = [
     ],
     imageFirst: false,
     image: {
-      src: "/images/storm.jpg",
-      alt: "Technician repairing ceiling storm damage from a lift",
+      src: "/images/work/attic-containment.jpg",
+      alt: "Technician sealing attic containment beneath storm-damaged roof boards",
+      width: 1200,
+      height: 1600,
     },
     cta: { kind: "phone" },
   },
 ];
+
+function ServiceImage({ image }: { image: ServiceDetailData["image"] }) {
+  const small = image.src.replace(/\.jpg$/, "-800.jpg");
+  return (
+    <img
+      src={image.src}
+      srcSet={`${small} ${image.width / 2}w, ${image.src} ${image.width}w`}
+      sizes="(max-width: 1000px) 100vw, 50vw"
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+      loading="lazy"
+      decoding="async"
+    />
+  );
+}
 
 export default function ServicesPage() {
   return (
@@ -156,9 +190,7 @@ export default function ServicesPage() {
       <div className="container services-detail">
         {SERVICE_DETAILS.map((service) => (
           <div key={service.id} id={service.id} className="service-detail">
-            {service.imageFirst && (
-              <img src={service.image.src} alt={service.image.alt} />
-            )}
+            {service.imageFirst && <ServiceImage image={service.image} />}
             <div className="service-detail-copy">
               <span className="service-detail-icon">{service.icon}</span>
               <h2>{service.title}</h2>
@@ -182,9 +214,7 @@ export default function ServicesPage() {
                 </Link>
               )}
             </div>
-            {!service.imageFirst && (
-              <img src={service.image.src} alt={service.image.alt} />
-            )}
+            {!service.imageFirst && <ServiceImage image={service.image} />}
           </div>
         ))}
       </div>

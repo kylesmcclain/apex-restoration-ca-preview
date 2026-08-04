@@ -18,7 +18,7 @@ export default function Footer() {
           Ready to get started? Call us or request a free quote.
         </span>
         <Link href="/contact" className="footer-cta-btn" prefetch={false}>
-          Get my free quote
+          Get a Free Quote
         </Link>
         <a href={PHONE_HREF} className="footer-cta-phone">
           {PHONE_DISPLAY}
@@ -28,7 +28,14 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <div className="footer-logo-plate">
-              <img src="/images/apex-logo.png" alt="Apex Restoration" />
+              <img
+                src="/images/apex-logo-320.png"
+                alt="Apex Restoration"
+                width={320}
+                height={114}
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             <p>
               Apex Restoration is a family-owned water, flood, and mold
