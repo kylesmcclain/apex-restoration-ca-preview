@@ -7,7 +7,7 @@ import type { ContactPayload } from "@/types/contact";
 export const runtime = "nodejs";
 
 const RELAY_ENDPOINT =
-  "https://formsubmit.co/ajax/apexrestorationca@yahoo.com";
+  "https://formsubmit.co/ajax/william@apexrestorationca.com";
 const RELAY_SUBJECT = "New quote request from apexrestorationca.com";
 const SITE_ORIGIN = "https://apexrestorationca.com";
 
@@ -73,6 +73,17 @@ export async function POST(request: Request) {
     });
 
     if (!relayResponse.ok) {
+      return NextResponse.json({ ok: false }, { status: 502 });
+    }
+
+    // FormSubmit reports some failures (e.g. an endpoint email that hasn't
+    // completed its one-time activation) as HTTP 200 with success:"false".
+    // Propagate those as failures so the visitor sees the call-us fallback
+    // instead of a false confirmation while the lead silently vanishes.
+    const relayResult = (await relayResponse.json().catch(() => null)) as {
+      success?: string | boolean;
+    } | null;
+    if (relayResult?.success !== "true" && relayResult?.success !== true) {
       return NextResponse.json({ ok: false }, { status: 502 });
     }
 

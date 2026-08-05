@@ -1,6 +1,6 @@
 export const PHONE_DISPLAY = "(510) 925-7538";
 export const PHONE_HREF = "tel:5109257538";
-export const EMAIL = "ApexrestorationCA@yahoo.com";
+export const EMAIL = "william@apexrestorationca.com";
 export const ADDRESS_LINE1 = "1200 Placeholder Way";
 export const ADDRESS_LINE2 = "Oakland, CA 94601";
 export const LICENSE_LINE =
